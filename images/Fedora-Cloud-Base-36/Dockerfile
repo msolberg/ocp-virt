@@ -1,0 +1,3 @@
+FROM scratch
+ADD Fedora-Cloud-Base-36-1.5.x86_64.qcow2 /disk/
+
