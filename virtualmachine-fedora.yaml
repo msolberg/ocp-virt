@@ -1,0 +1,238 @@
+﻿apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  annotations:
+    kubemacpool.io/transaction-timestamp: '2022-11-10T15:16:32.856300706Z'
+    kubevirt.io/latest-observed-api-version: v1
+    kubevirt.io/storage-observed-api-version: v1alpha3
+    name.os.template.kubevirt.io/fedora35: Fedora 34 or higher
+    vm.kubevirt.io/validations: |
+      [
+        {
+          "name": "minimal-required-memory",
+          "path": "jsonpath::.spec.domain.resources.requests.memory",
+          "rule": "integer",
+          "message": "This VM requires more memory.",
+          "min": 1073741824
+        }
+      ]
+  resourceVersion: '624203'
+  name: fedora
+  uid: 7553d1a7-b405-4df8-8df9-1b7f0c1c4a7d
+  creationTimestamp: '2022-11-10T15:16:32Z'
+  generation: 1
+  managedFields:
+    - apiVersion: kubevirt.io/v1alpha3
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            'f:kubevirt.io/latest-observed-api-version': {}
+            'f:kubevirt.io/storage-observed-api-version': {}
+        'f:status': {}
+      manager: Go-http-client
+      operation: Update
+      time: '2022-11-10T15:16:32Z'
+    - apiVersion: kubevirt.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:name.os.template.kubevirt.io/fedora35': {}
+            'f:vm.kubevirt.io/validations': {}
+          'f:labels':
+            'f:vm.kubevirt.io/template.version': {}
+            'f:vm.kubevirt.io/template.namespace': {}
+            'f:flavor.template.kubevirt.io/medium': {}
+            'f:app': {}
+            .: {}
+            'f:vm.kubevirt.io/template.revision': {}
+            'f:workload.template.kubevirt.io/server': {}
+            'f:os.template.kubevirt.io/fedora35': {}
+            'f:vm.kubevirt.io/template': {}
+        'f:spec':
+          .: {}
+          'f:dataVolumeTemplates': {}
+          'f:running': {}
+          'f:template':
+            .: {}
+            'f:metadata':
+              .: {}
+              'f:annotations':
+                .: {}
+                'f:vm.kubevirt.io/flavor': {}
+                'f:vm.kubevirt.io/os': {}
+                'f:vm.kubevirt.io/workload': {}
+              'f:labels':
+                .: {}
+                'f:flavor.template.kubevirt.io/medium': {}
+                'f:kubevirt.io/domain': {}
+                'f:kubevirt.io/size': {}
+                'f:os.template.kubevirt.io/fedora35': {}
+                'f:vm.kubevirt.io/name': {}
+                'f:workload.template.kubevirt.io/server': {}
+            'f:spec':
+              .: {}
+              'f:domain':
+                .: {}
+                'f:cpu':
+                  .: {}
+                  'f:cores': {}
+                  'f:sockets': {}
+                  'f:threads': {}
+                'f:devices':
+                  .: {}
+                  'f:disks': {}
+                  'f:gpus': {}
+                  'f:hostDevices': {}
+                  'f:interfaces': {}
+                  'f:networkInterfaceMultiqueue': {}
+                  'f:rng': {}
+                'f:machine':
+                  .: {}
+                  'f:type': {}
+                'f:resources':
+                  .: {}
+                  'f:requests':
+                    .: {}
+                    'f:memory': {}
+              'f:evictionStrategy': {}
+              'f:hostname': {}
+              'f:networks': {}
+              'f:terminationGracePeriodSeconds': {}
+              'f:volumes': {}
+      manager: Mozilla
+      operation: Update
+      time: '2022-11-10T15:16:32Z'
+    - apiVersion: kubevirt.io/v1alpha3
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:conditions': {}
+          'f:created': {}
+          'f:printableStatus': {}
+          'f:ready': {}
+          'f:volumeSnapshotStatuses': {}
+      manager: Go-http-client
+      operation: Update
+      subresource: status
+      time: '2022-11-10T15:18:37Z'
+  namespace: creating-accessing-vms
+  labels:
+    app: fedora
+    flavor.template.kubevirt.io/medium: 'true'
+    os.template.kubevirt.io/fedora35: 'true'
+    vm.kubevirt.io/template: fedora-server-medium
+    vm.kubevirt.io/template.namespace: openshift
+    vm.kubevirt.io/template.revision: '1'
+    vm.kubevirt.io/template.version: v0.19.3
+    workload.template.kubevirt.io/server: 'true'
+spec:
+  dataVolumeTemplates:
+    - metadata:
+        creationTimestamp: null
+        name: fedora-rootdisk-bctzo
+      spec:
+        source:
+          registry:
+            url: 'docker://quay.io/msolberg/ocp-virt-images/fedora-cloud-base:36-1.5'
+        storage:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 30Gi
+          storageClassName: nfs-storage
+          volumeMode: Filesystem
+  running: true
+  template:
+    metadata:
+      annotations:
+        vm.kubevirt.io/flavor: medium
+        vm.kubevirt.io/os: fedora
+        vm.kubevirt.io/workload: server
+      creationTimestamp: null
+      labels:
+        flavor.template.kubevirt.io/medium: 'true'
+        kubevirt.io/domain: fedora
+        kubevirt.io/size: medium
+        os.template.kubevirt.io/fedora35: 'true'
+        vm.kubevirt.io/name: fedora
+        workload.template.kubevirt.io/server: 'true'
+    spec:
+      domain:
+        cpu:
+          cores: 1
+          sockets: 1
+          threads: 1
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              name: cloudinitdisk
+            - bootOrder: 1
+              disk:
+                bus: virtio
+              name: rootdisk
+          interfaces:
+            - macAddress: '02:39:77:00:00:02'
+              masquerade: {}
+              model: virtio
+              name: default
+          networkInterfaceMultiqueue: true
+          rng: {}
+        machine:
+          type: pc-q35-rhel8.4.0
+        resources:
+          requests:
+            memory: 4Gi
+      evictionStrategy: LiveMigrate
+      hostname: fedora
+      networks:
+        - name: default
+          pod: {}
+      terminationGracePeriodSeconds: 180
+      volumes:
+        - cloudInitNoCloud:
+            userData: |
+              #cloud-config
+              user: fedora
+              password: '6r7d-0ukn-18ww'
+              chpasswd:
+                expire: false
+          name: cloudinitdisk
+        - dataVolume:
+            name: fedora-rootdisk-bctzo
+          name: rootdisk
+status:
+  conditions:
+    - lastProbeTime: null
+      lastTransitionTime: '2022-11-10T15:18:35Z'
+      status: 'True'
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: null
+      message: >-
+        cannot migrate VMI: PVC fedora-rootdisk-bctzo is not shared, live
+        migration requires that all PVCs must be shared (using ReadWriteMany
+        access mode)
+      reason: DisksNotLiveMigratable
+      status: 'False'
+      type: LiveMigratable
+    - lastProbeTime: '2022-11-10T15:19:01Z'
+      lastTransitionTime: null
+      status: 'True'
+      type: AgentConnected
+  created: true
+  printableStatus: Running
+  ready: true
+  volumeSnapshotStatuses:
+    - enabled: false
+      name: cloudinitdisk
+      reason: 'Snapshot is not supported for this volumeSource type [cloudinitdisk]'
+    - enabled: false
+      name: rootdisk
+      reason: >-
+        No VolumeSnapshotClass: Volume snapshots are not configured for this
+        StorageClass [nfs-storage] [rootdisk]
